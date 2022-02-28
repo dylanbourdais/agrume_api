@@ -1,0 +1,9 @@
+node_modules
+.env
+agrume.sql
+data.sql
+md
+bonus.md
+interview.md
+README.md
+data

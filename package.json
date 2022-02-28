@@ -1,0 +1,27 @@
+{
+  "name": "projet-imts-hybridagrume",
+  "version": "1.0.0",
+  "description": "La société Hybrid'agrume vous contacte pour son projet d'application. Il s'agit d'une entreprise de biochimie qui travaille dans le croisement d'espèces de fruit, spécialisée dans les agrumes.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpruliere/projet-imts-hybridagrume.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpruliere/projet-imts-hybridagrume/issues"
+  },
+  "homepage": "https://github.com/jpruliere/projet-imts-hybridagrume#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "knex": "^1.0.3",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3"
+  }
+}
