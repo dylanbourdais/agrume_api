@@ -4,7 +4,8 @@
   "description": "La société Hybrid'agrume vous contacte pour son projet d'application. Il s'agit d'une entreprise de biochimie qui travaille dans le croisement d'espèces de fruit, spécialisée dans les agrumes.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
     "knex": "^1.0.3",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
   }
 }
