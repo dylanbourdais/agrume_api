@@ -17,9 +17,41 @@ router.get('/:id' , async (req , res) =>{
 
 });
 
+router.get('/minju/:juiciness' , async (req , res) =>{
+  const juiciness = req.params.juiciness;
+  const varietyy = await variety.findByMinJuiciness(juiciness);
+  res.json(varietyy);
+
+});
+
+router.get('/maxJu/:juiciness' , async (req , res) =>{
+  const juiciness = req.params.juiciness;
+  const varietyy = await variety.findByMaxJuiciness(juiciness);
+  res.json(varietyy);
+
+});
+
+router.get('/minBi/:bitterness' , async (req , res) =>{
+  const bitterness = req.params.bitterness;
+  const varietyy = await variety.findByMinBitterness(bitterness);
+  res.json(varietyy);
+});
+
+router.get('/maxBi/:bitterness' , async (req , res) =>{
+  const bitterness = req.params.bitterness;
+  const varietyy = await variety.findByMaxBitterness(bitterness);
+  res.json(varietyy);
+});
+
+router.get('/species/:sp', async (req, res) => {
+  const sp = req.params.sp;
+  const speciess = await variety.findBySpecies(sp);
+  res.json(speciess);
+});
+
 router.post('/' , async (req , res) =>{
-   await variety.insert(req.body);
-  res.json('data is succes');
+  const varietyy = await variety.insert(req.body);
+  res.json(varietyy);
 });
 
 router.delete('/:id' , async (req , res) =>{

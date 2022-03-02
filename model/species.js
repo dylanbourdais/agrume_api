@@ -9,7 +9,7 @@ const findOne = async (id) =>{
 }
 
 const insert = async (object) =>{
-      await db('species').insert(object);  
+      return await db('species').returning(['id' , 'scientific_name' , 'vernacular_name' ,  'family_id']).insert(object);
 }
 
 const destroy = async (id) =>{
@@ -21,4 +21,11 @@ const update = async (id , object) =>{
       await db('species').update(object).where({id});
 }
 
-module.exports = {findAll , findOne , insert , destroy , update};
+
+const findByFamily = async (family_id) => {
+      return await db('species').select().where({family_id});
+}
+
+
+
+module.exports = {findAll , findOne , insert , destroy , update , findByFamily};
