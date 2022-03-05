@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.post('/' , async (req , res) =>{
   try{
-    const speciess =  await species.insert(req.body);
+    const speciess = await species.insert(req.body);
     res.status(201).json(speciess);
   }catch(err){
     res.status(400).send(err.message);
