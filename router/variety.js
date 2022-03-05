@@ -32,9 +32,9 @@ try{
   if(err.message.includes("not found")){
      res.status(404).send(err.message);
   }else{
-  res.status(400).send(err.message);
+     res.status(400).send(err.message);
   }
-};
+ };
 });
 
 
@@ -47,7 +47,7 @@ router.put('/:id', async (req , res) =>{
     res.status(200).json('data is succes');
   }catch(err){
     res.status(400).send(err.message);
-  }
+  };
 
 });
 
