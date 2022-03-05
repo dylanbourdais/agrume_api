@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const variety = require('../model/variety');
+const Joi = require('joi'); 
 
 const router = new Router();
 
@@ -15,6 +16,14 @@ router.get('/', async (req, res) => {
 
 router.post('/' , async (req , res) =>{
   try{
+    const schema = Joi.object({
+      "cultivar" : Joi.string().required(),
+      "bitterness": Joi.number().required(),
+      "juiciness": Joi.number().required(),
+      "species_id": Joi.number().required()
+    });
+    schema.validate(req.body);
+
     const varietyy = await variety.insert(req.body);
     res.status(201).json(varietyy);
   }catch(err){
@@ -41,8 +50,15 @@ try{
 
 router.put('/:id', async (req , res) =>{
   try{
-    const id =  req.params.id;
+    const id =   parseInt(req.params.id);
     const body = req.body;
+    const schema = Joi.object({
+      "cultivar" : Joi.string().required(),
+      "bitterness": Joi.number().required(),
+      "juiciness": Joi.number().required(),
+      "species_id": Joi.number().required()
+    });
+    schema.validate(body);
     await variety.update(id , body);
     res.status(200).json('data is succes');
   }catch(err){
@@ -53,9 +69,9 @@ router.put('/:id', async (req , res) =>{
 
 router.delete('/:id' , async (req , res) =>{
    try{
-    const id = req.params.id;
+    const id =  parseInt(req.params.id);
     await variety.destroy(id);
-    res.status(204).json('succes delete');
+    res.status(200).json('succes delete');
    }catch(err){
     res.status(400).send(err.message);
    };
@@ -64,6 +80,17 @@ router.delete('/:id' , async (req , res) =>{
 router.post('/filter/scores' , async (req , res) =>{
   try{
     const request = req.body;
+    const schema = Joi.object({
+      "juiciness": Joi.object({
+        min: Joi.number(),
+        max: Joi.number()
+      }),
+      "bitterness": Joi.object({
+        min: Joi.number(),
+        max: Joi.number()
+      })
+    });
+    schema.validate(request);
     const varietyy = await variety.findBetween(request);
     res.status(200).json(varietyy);
   }catch(err){

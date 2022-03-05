@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const species = require('../model/species');
+const Joi = require('joi');
 
 const router = new Router();
 
@@ -14,6 +15,12 @@ router.get('/', async (req, res) => {
 
 router.post('/' , async (req , res) =>{
   try{
+    const schema = Joi.object({
+      "scientific_name": Joi.string().required(),
+      "vernacular_name": Joi.string().required(),
+      "family_id": Joi.string().required()
+    });
+    schema.validate(req.body);
     const speciess = await species.insert(req.body);
     res.status(201).json(speciess);
   }catch(err){
@@ -38,20 +45,26 @@ router.get('/:id' , async (req , res) =>{
 
 router.put('/:id', async (req , res) =>{
   try{
-     const id =  req.params.id;
+     const id =  parseInt(req.params.id);
      const body = req.body;
+     const schema = Joi.object({
+      "scientific_name": Joi.string().required(),
+      "vernacular_name": Joi.string().required(),
+      "family_id": Joi.string().required()
+    });
+    schema.validate(body);
      await species.update(id , body);
      res.status(200).json("data is success");
   }catch(err){
-    res.status(400).send(err.message);
+     res.status(400).send(err.message);
   };
 });
 
 router.delete('/:id' , async (req , res) =>{
   try{
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
     await species.destroy(id);
-    res.status(204).json("data is success");
+    res.status(200).json("data is success");
   }catch(err){
     res.status(400).send(err.message);
   };
@@ -60,7 +73,7 @@ router.delete('/:id' , async (req , res) =>{
 
 router.get('/filter/family/:fa', async (req, res) => {
   try{
-    const fa = req.params.fa;
+    const fa = (req.params.fa);
     const family = await species.findByFamily(fa);
     res.status(200).json(family);
   }catch(err){
