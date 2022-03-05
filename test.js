@@ -11,16 +11,16 @@ test('the data is findAll', async () => {
   });
 
 
-/*
+
   test('the data is findOne', async () => {
     const speciess = await species.findOne(12);
     jest.setTimeout(50000);
     expect(speciess);
   });
-*/
 
 
-/*
+
+
   test('the data is insert', async () => {
        const object = {
        "scientific_name": "fruit ",
@@ -32,13 +32,13 @@ test('the data is findAll', async () => {
     expect(speciess);
   });
 
-  */
+  
 
-  /*
+  
   
   test('the data is update', async () => {
 
-    const id =  83;
+    const id =  84;
     const object  = {
        "scientific_name": "fruiter ",
        "vernacular_name": "fruit",
@@ -48,17 +48,17 @@ test('the data is findAll', async () => {
    jest.setTimeout(50000);
    expect(speciess);
  });
-*/
+
  
 
 
- /*
+ 
   test('the data is destroy', async () => {
-    const speciess = await species.destroy(83);
+    const speciess = await species.destroy(84);
     jest.setTimeout(50000);
     expect(speciess);
   });
-*/
+
 
   species.findAll().then(console.table);
 

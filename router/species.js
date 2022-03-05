@@ -4,53 +4,68 @@ const species = require('../model/species');
 const router = new Router();
 
 router.get('/', async (req, res) => {
-
-  const speciess = await species.findAll();
-
-  res.json(speciess);
+  try{
+     const speciess = await species.findAll();
+     res.status(200).json(speciess);
+  }catch(err){
+     res.status(400).send(err.message);
+  };
 });
 
 router.post('/' , async (req , res) =>{
+  try{
     const speciess =  await species.insert(req.body);
-    res.json(speciess);
-  
- 
+    res.status(201).json(speciess);
+  }catch(err){
+    res.status(400).send(err.message);
+  };
 });
 
 
 router.get('/:id' , async (req , res) =>{
-  const id = req.params.id;
-  
-  const speciess = await species.findOne(id);
-
-  res.json(speciess);
-
+  try{
+    const id = parseInt(req.params.id);
+    const speciess = await species.findOne(id);
+    res.status(200).json(speciess);
+  }catch(err){
+    if(err.message.includes("not found")){
+      res.status(404).send(err.message);
+   }else{
+   res.status(400).send(err.message);
+   }
+  };
 });
 
 router.put('/:id', async (req , res) =>{
-
-    const id =  req.params.id;
-    const body = req.body;
-    await species.update(id , body);
-    res.json('data is succes').statut(201);
-
-
+  try{
+     const id =  req.params.id;
+     const body = req.body;
+     await species.update(id , body);
+     res.status(200).json("data is success");
+  }catch(err){
+    res.status(400).send(err.message);
+  };
 });
 
 router.delete('/:id' , async (req , res) =>{
-  
+  try{
     const id = req.params.id;
     await species.destroy(id);
-    res.json('succes delete');
- 
- 
+    res.status(204).json("data is success");
+  }catch(err){
+    res.status(400).send(err.message);
+  };
 });
 
 
 router.get('/filter/family/:fa', async (req, res) => {
-  const fa = req.params.fa;
-  const family = await species.findByFamily(fa);
-  res.json(family);
+  try{
+    const fa = req.params.fa;
+    const family = await species.findByFamily(fa);
+    res.status(200).json(family);
+  }catch(err){
+    res.status(400).send(err.message);
+  };
 });
 
 
